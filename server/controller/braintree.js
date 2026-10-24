@@ -1,15 +1,26 @@
 var braintree = require("braintree");
 require("dotenv").config();
 
-var gateway = new braintree.BraintreeGateway({
-  environment: braintree.Environment.Sandbox,
-  merchantId: process.env.BRAINTREE_MERCHANT_ID,
-  publicKey: process.env.BRAINTREE_PUBLIC_KEY,
-  privateKey: process.env.BRAINTREE_PRIVATE_KEY,
-});
+const merchantId = process.env.BRAINTREE_MERCHANT_ID;
+const publicKey = process.env.BRAINTREE_PUBLIC_KEY;
+const privateKey = process.env.BRAINTREE_PRIVATE_KEY;
+
+var gateway =
+  merchantId && publicKey && privateKey
+    ? new braintree.BraintreeGateway({
+        environment: braintree.Environment.Sandbox,
+        merchantId: merchantId,
+        publicKey: publicKey,
+        privateKey: privateKey,
+      })
+    : null;
+
+const notConfigured = (res) =>
+  res.status(503).json({ error: "Payment gateway is not configured" });
 
 class brainTree {
   ganerateToken(req, res) {
+    if (!gateway) return notConfigured(res);
     gateway.clientToken.generate({}, (err, response) => {
       if (err) {
         return res.json(err);
@@ -19,6 +30,7 @@ class brainTree {
   }
 
   paymentProcess(req, res) {
+    if (!gateway) return notConfigured(res);
     let { amountTotal, paymentMethod } = req.body;
     gateway.transaction.sale(
       {
