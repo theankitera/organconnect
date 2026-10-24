@@ -65,7 +65,7 @@ const AdminNavber = (props) => {
         <div className="lg:hidden flex items-center">
           <svg
             id="hamburgerBtn"
-            className="lg:hidden w-8 h-8 cursor-pointer text-gray-600"
+            className="lg:hidden w-8 h-8 flex-none cursor-pointer text-gray-600"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -81,7 +81,7 @@ const AdminNavber = (props) => {
           <span
             onClick={(e) => history.push("/admin/dashboard")}
             style={{ letterSpacing: "0.10rem" }}
-            className="flex items-center text-center font-bold uppercase text-teal-700 text-2xl cursor-pointer px-2"
+            className="flex items-center whitespace-nowrap text-center font-bold uppercase text-teal-700 text-xl md:text-2xl cursor-pointer px-2"
           >
             <svg
               className="w-7 h-7 mr-1"

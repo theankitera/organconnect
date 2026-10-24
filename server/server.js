@@ -21,7 +21,11 @@ const { loginCheck } = require("./middleware/auth");
 const CreateAllFolder = require("./config/uploadFolderCreateScript");
 
 /* Create All Uploads Folder if not exists | For Uploading Images */
-CreateAllFolder();
+try {
+  CreateAllFolder();
+} catch (err) {
+  console.log("Skipping uploads folder creation (read-only filesystem)");
+}
 
 // Database Connection
 mongoose
@@ -54,8 +58,12 @@ app.use("/api", brainTreeRouter);
 app.use("/api/order", orderRouter);
 app.use("/api/customize", customizeRouter);
 
-// Run Server
+// Run Server (locally only — Vercel imports the app instead)
 const PORT = process.env.PORT || 8000;
-app.listen(PORT, () => {
-  console.log("Server is running on ", PORT);
-});
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log("Server is running on ", PORT);
+  });
+}
+
+module.exports = app;

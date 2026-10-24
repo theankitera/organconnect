@@ -52,10 +52,10 @@ const Navber = (props) => {
               Contact us
             </span> */}
           </div>
-          <div className="col-span-2 lg:hidden flex justify-items-stretch	 items-center">
+          <div className="col-span-1 lg:hidden flex items-center">
             <svg
               onClick={(e) => navberToggleOpen()}
-              className="col-span-1 lg:hidden w-8 h-8 cursor-pointer text-gray-600"
+              className="w-8 h-8 flex-none cursor-pointer text-gray-600"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -68,13 +68,14 @@ const Navber = (props) => {
                 d="M4 6h16M4 12h16M4 18h16"
               />
             </svg>
+          </div>
+          <div className="col-span-2 lg:hidden flex items-center justify-center">
             <span
               onClick={(e) => history.push("/")}
-              style={{ letterSpacing: "0.10rem" }}
-              className="flex items-center text-center font-bold uppercase text-teal-700 text-2xl cursor-pointer px-2"
+              className="flex items-center justify-center text-center font-bold uppercase text-teal-700 text-lg md:text-2xl whitespace-nowrap px-1 cursor-pointer"
             >
               <svg
-                className="w-7 h-7 mr-1"
+                className="hidden sm:block w-6 h-6 mr-1 flex-none"
                 viewBox="0 0 64 64"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -119,7 +120,7 @@ const Navber = (props) => {
             </svg>
             OrganConnect
           </div>
-          <div className="flex items-right col-span-2 lg:col-span-1 flex justify-end">
+          <div className="flex items-right col-span-1 lg:col-span-1 flex justify-end">
             {/*  WishList Page Button */}
             <div
               // onClick={(e) => history.push("/wish-list")}
@@ -175,7 +176,7 @@ const Navber = (props) => {
                           >
                             <span>
                             <svg
-  class="w-8 h-8 text-black hover:text-green-700"
+  class="w-8 h-8 text-black hover:text-teal-700"
   fill="none"
   stroke="currentColor"
   viewBox="0 0 24 24"
@@ -352,7 +353,7 @@ const Navber = (props) => {
               /* Login Modal Button */
               <div
                 onClick={(e) => loginModalOpen()}
-                className="cursor-pointer hover:bg-gray-200 px-2 py-2 rounded-lg"
+                className="cursor-pointer hover:bg-gray-200 px-1 sm:px-2 py-2 rounded-lg"
                 title="Login"
               >
                 <svg
@@ -374,11 +375,11 @@ const Navber = (props) => {
             {/* Cart Modal Button */}
             <div
               onClick={(e) => cartModalOpen()}
-              className="hover:bg-gray-200 px-2 py-2 rounded-lg relative cursor-pointer"
+              className="hover:bg-gray-200 px-1 sm:px-2 py-2 rounded-lg relative cursor-pointer"
               title="Organs"
             >
             <svg
-  class="w-8 h-8 text-black hover:text-green-700"
+  class="w-8 h-8 text-black hover:text-teal-700"
   fill="none"
   stroke="currentColor"
   viewBox="0 0 24 24"
