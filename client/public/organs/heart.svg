@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="70%">
+      <stop offset="0%" stop-color="#134e4a"/><stop offset="100%" stop-color="#02110f"/>
+    </radialGradient>
+    <linearGradient id="flesh" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fb7185"/><stop offset="55%" stop-color="#e11d48"/><stop offset="100%" stop-color="#881337"/>
+    </linearGradient>
+    <linearGradient id="vessel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#5eead4"/><stop offset="100%" stop-color="#0f766e"/>
+    </linearGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="10" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4"/>
+    </filter>
+  </defs>
+  <rect width="480" height="360" fill="url(#bg)"/>
+  <circle cx="240" cy="185" r="120" fill="#e11d48" opacity="0.14" filter="url(#soft)"/>
+  <g filter="url(#glow)">
+    <path d="M240 300s-92-56-92-124c0-33 26-54 52-54 19 0 33 11 40 24 7-13 21-24 40-24 26 0 52 21 52 54 0 68-92 124-92 124z" fill="url(#flesh)"/>
+    <path d="M212 150c-14 6-22 20-22 38 0 30 18 55 30 70" stroke="#9f1239" stroke-width="6" fill="none" opacity="0.55" stroke-linecap="round"/>
+    <path d="M240 122c-4-22 6-40 24-48M262 78c10-8 24-8 34 2M240 122c8-16 2-38-14-48" stroke="url(#vessel)" stroke-width="10" fill="none" stroke-linecap="round"/>
+    <path d="M286 140c14 4 24 16 26 32" stroke="#fda4af" stroke-width="7" fill="none" stroke-linecap="round" opacity="0.8"/>
+  </g>
+  <g font-family="Arial, sans-serif" text-anchor="middle">
+    <text x="240" y="46" fill="#5eead4" font-size="13" letter-spacing="6" font-weight="700">HUMAN HEART</text>
+    <text x="240" y="336" fill="rgba(204,251,241,0.55)" font-size="10" letter-spacing="3">VIABLE · 4–6H ISCHEMIA</text>
+  </g>
+</svg>

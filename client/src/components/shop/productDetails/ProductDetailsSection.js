@@ -4,6 +4,8 @@ import { ProductDetailsContext } from "./index";
 import { LayoutContext } from "../layout";
 import Submenu from "./Submenu";
 import ProductDetailsSectionTwo from "./ProductDetailsSectionTwo";
+import FallbackOrganDetails from "./FallbackOrganDetails";
+import { getFallbackOrgan } from "../../../data/fallbackOrgans";
 
 import { getSingleProduct } from "./FetchApi";
 import { cartListProduct } from "../partials/FetchApi";
@@ -71,6 +73,11 @@ const ProductDetailsSection = (props) => {
       console.log(error);
     }
   };
+
+  const fallbackOrgan = getFallbackOrgan(id);
+  if (fallbackOrgan && !sProduct) {
+    return <FallbackOrganDetails organ={fallbackOrgan} />;
+  }
 
   if (data.loading) {
     return (
