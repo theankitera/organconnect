@@ -1,0 +1,618 @@
+/* ============ OrganConnect Ultra 3D ============ */
+
+:root {
+  --oc-teal: #0d9488;
+  --oc-teal-dark: #0f766e;
+  --oc-teal-deep: #04100f;
+  --oc-rose: #fb7185;
+  --oc-mint: #5eead4;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+/* ---------- 3D Canvas hosts ---------- */
+.oc-3d-hero {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.oc-3d-hero canvas {
+  display: block;
+}
+
+.oc-3d-mini {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+/* ---------- Hero section ---------- */
+.oc-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(13, 148, 136, 0.22) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 70%, rgba(225, 29, 72, 0.14) 0%, transparent 50%),
+    linear-gradient(160deg, #02100e 0%, #041f1c 45%, #071a2b 100%);
+}
+
+.oc-hero-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 8rem 1.5rem 5rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .oc-hero-content {
+    grid-template-columns: 1.05fr 0.95fr;
+    align-items: center;
+    padding: 9rem 3rem 6rem;
+  }
+}
+
+.oc-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #99f6e4;
+  background: rgba(13, 148, 136, 0.16);
+  border: 1px solid rgba(94, 234, 212, 0.35);
+  backdrop-filter: blur(8px);
+  animation: oc-pulse-ring 3s ease-in-out infinite;
+}
+
+.oc-hero-title {
+  margin-top: 1.4rem;
+  color: #fff;
+  font-weight: 800;
+  font-size: clamp(2.4rem, 6vw, 4.4rem);
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  text-shadow: 0 0 60px rgba(13, 148, 136, 0.45);
+}
+
+.oc-hero-title .oc-grad {
+  background: linear-gradient(100deg, #5eead4 0%, #2dd4bf 40%, #fb7185 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.oc-hero-sub {
+  margin-top: 1.4rem;
+  max-width: 34rem;
+  color: rgba(204, 251, 241, 0.78);
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+
+.oc-hero-cta {
+  margin-top: 2.2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.oc-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.9rem 2rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.92rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transform-style: preserve-3d;
+}
+
+.oc-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+}
+
+.oc-btn-primary {
+  color: #022c22;
+  background: linear-gradient(120deg, #5eead4, #2dd4bf 55%, #14b8a6);
+  box-shadow: 0 12px 34px -10px rgba(45, 212, 191, 0.65);
+}
+
+.oc-btn-primary:hover {
+  box-shadow: 0 18px 44px -10px rgba(45, 212, 191, 0.85);
+}
+
+.oc-btn-ghost {
+  color: #ccfbf1;
+  border: 1px solid rgba(94, 234, 212, 0.45);
+  background: rgba(15, 118, 110, 0.18);
+  backdrop-filter: blur(10px);
+}
+
+.oc-btn-ghost:hover {
+  border-color: #5eead4;
+  box-shadow: 0 12px 30px -12px rgba(94, 234, 212, 0.5);
+}
+
+.oc-hero-stats {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-top: 3rem;
+}
+
+@media (min-width: 768px) {
+  .oc-hero-stats {
+    grid-template-columns: repeat(4, 1fr);
+    max-width: 40rem;
+  }
+}
+
+.oc-hero-stat {
+  padding: 1rem;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(94, 234, 212, 0.16);
+  backdrop-filter: blur(12px);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.oc-hero-stat:hover {
+  transform: translateY(-4px);
+  border-color: rgba(94, 234, 212, 0.5);
+}
+
+.oc-hero-stat b {
+  display: block;
+  color: #f0fdfa;
+  font-size: 1.4rem;
+}
+
+.oc-hero-stat span {
+  color: rgba(153, 246, 228, 0.7);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.oc-scroll-hint {
+  position: absolute;
+  bottom: 1.6rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  color: rgba(153, 246, 228, 0.65);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  animation: oc-bob 2.4s ease-in-out infinite;
+}
+
+/* ---------- Reveal on scroll ---------- */
+.oc-reveal {
+  opacity: 0;
+  transform: translateY(36px) scale(0.985);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.oc-reveal.oc-revealed {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.oc-reveal-delay-1 { transition-delay: 0.1s; }
+.oc-reveal-delay-2 { transition-delay: 0.2s; }
+.oc-reveal-delay-3 { transition-delay: 0.3s; }
+.oc-reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ---------- Sections ---------- */
+.oc-section {
+  position: relative;
+  padding: 5rem 1.5rem;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .oc-section {
+    padding: 6.5rem 3rem;
+  }
+}
+
+.oc-section-tag {
+  display: inline-block;
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--oc-teal);
+  background: rgba(13, 148, 136, 0.1);
+  border: 1px solid rgba(13, 148, 136, 0.25);
+  margin-bottom: 1rem;
+}
+
+.oc-section-title {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 800;
+  color: #134e4a;
+  line-height: 1.15;
+}
+
+.oc-section-title em {
+  font-style: normal;
+  background: linear-gradient(100deg, var(--oc-teal), var(--oc-rose));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.oc-section-desc {
+  margin-top: 1rem;
+  max-width: 40rem;
+  color: #4b5563;
+  line-height: 1.8;
+}
+
+/* ---------- Tilt cards ---------- */
+.oc-tilt-card {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.18s ease-out, box-shadow 0.3s ease;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 10px 30px -18px rgba(15, 118, 110, 0.35);
+  border: 1px solid rgba(13, 148, 136, 0.12);
+  cursor: pointer;
+}
+
+.oc-tilt-card:hover {
+  box-shadow: 0 28px 60px -24px rgba(15, 118, 110, 0.55);
+  border-color: rgba(13, 148, 136, 0.35);
+}
+
+.oc-tilt-glare {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  transition: opacity 0.25s ease;
+  mix-blend-mode: soft-light;
+}
+
+/* ---------- Glass panels ---------- */
+.oc-glass {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(13, 148, 136, 0.14);
+  border-radius: 20px;
+  box-shadow: 0 20px 50px -30px rgba(4, 120, 87, 0.55);
+}
+
+.oc-glass-dark {
+  background: rgba(4, 30, 28, 0.6);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(94, 234, 212, 0.18);
+  border-radius: 20px;
+}
+
+/* ---------- Steps (how it works) ---------- */
+.oc-step-num {
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-weight: 800;
+  color: #fff;
+  background: linear-gradient(135deg, var(--oc-teal), #14b8a6);
+  box-shadow: 0 10px 26px -8px rgba(13, 148, 136, 0.7);
+}
+
+/* ---------- Feature icon bubbles ---------- */
+.oc-icon-bubble {
+  width: 3.2rem;
+  height: 3.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(13, 148, 136, 0.14), rgba(251, 113, 133, 0.12));
+  border: 1px solid rgba(13, 148, 136, 0.2);
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.oc-tilt-card:hover .oc-icon-bubble {
+  transform: translateZ(30px) rotate(-6deg) scale(1.08);
+}
+
+/* ---------- CTA band ---------- */
+.oc-cta-band {
+  position: relative;
+  overflow: hidden;
+  border-radius: 28px;
+  margin: 0 1.5rem 5rem;
+  background:
+    radial-gradient(ellipse at 30% 30%, rgba(13, 148, 136, 0.35) 0%, transparent 55%),
+    linear-gradient(135deg, #04211d 0%, #062a25 50%, #1a0b16 100%);
+  border: 1px solid rgba(94, 234, 212, 0.2);
+  box-shadow: 0 40px 90px -40px rgba(4, 120, 87, 0.8);
+}
+
+@media (min-width: 768px) {
+  .oc-cta-band {
+    margin: 0 3rem 6rem;
+  }
+}
+
+.oc-cta-inner {
+  position: relative;
+  z-index: 2;
+  padding: 4.5rem 2rem;
+  text-align: center;
+  color: #ccfbf1;
+}
+
+/* ---------- Navbar glass ---------- */
+.oc-nav-glass {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(18px) saturate(150%);
+  border-bottom: 1px solid rgba(13, 148, 136, 0.12);
+  box-shadow: 0 8px 32px -18px rgba(15, 118, 110, 0.45);
+  transition: box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.oc-nav-glass:hover {
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 14px 40px -18px rgba(15, 118, 110, 0.6);
+}
+
+.oc-nav-cta {
+  padding: 0.5rem 1.1rem;
+  border-radius: 10px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fff;
+  background: linear-gradient(120deg, var(--oc-teal), #14b8a6);
+  box-shadow: 0 8px 22px -8px rgba(13, 148, 136, 0.75);
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.oc-nav-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px -8px rgba(13, 148, 136, 0.9);
+}
+
+/* ---------- Footer ---------- */
+.oc-footer {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 15% 0%, rgba(13, 148, 136, 0.35) 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 100%, rgba(225, 29, 72, 0.16) 0%, transparent 45%),
+    linear-gradient(160deg, #042f2e 0%, #022422 55%, #011513 100%);
+  color: #ccfbf1;
+}
+
+.oc-footer-grid {
+  position: relative;
+  z-index: 2;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem 2rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .oc-footer-grid {
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    padding: 4.5rem 3rem 2rem;
+  }
+}
+
+.oc-footer a:hover {
+  color: #fff;
+}
+
+.oc-footer-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.35;
+  pointer-events: none;
+  animation: oc-float-slow 9s ease-in-out infinite;
+}
+
+/* ---------- Modal glass upgrade ---------- */
+.oc-modal-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(13, 148, 136, 0.2);
+  box-shadow:
+    0 40px 90px -30px rgba(4, 120, 87, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.6) inset;
+  animation: oc-modal-in 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.oc-modal-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0.5;
+  pointer-events: none;
+  animation: oc-float-slow 7s ease-in-out infinite;
+}
+
+/* ---------- Product cards ---------- */
+.oc-product-card img {
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.oc-product-card:hover img {
+  transform: scale(1.08) translateZ(20px);
+}
+
+.oc-product-card {
+  transform-style: preserve-3d;
+}
+
+.oc-product-meta {
+  transform: translateZ(24px);
+}
+
+/* ---------- FAQ ---------- */
+.oc-faq-item {
+  border: 1px solid rgba(13, 148, 136, 0.16);
+  border-radius: 16px;
+  background: #fff;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.oc-faq-item:hover {
+  border-color: rgba(13, 148, 136, 0.4);
+  box-shadow: 0 16px 40px -24px rgba(15, 118, 110, 0.5);
+}
+
+.oc-faq-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.45s cubic-bezier(0.22, 1, 0.36, 1), padding 0.3s ease;
+}
+
+.oc-faq-item.open .oc-faq-body {
+  max-height: 220px;
+  padding-bottom: 1.2rem;
+}
+
+.oc-faq-item.open .oc-faq-chevron {
+  transform: rotate(180deg);
+}
+
+.oc-faq-chevron {
+  transition: transform 0.35s ease;
+}
+
+/* ---------- Marquee ---------- */
+.oc-marquee {
+  overflow: hidden;
+  border-block: 1px solid rgba(13, 148, 136, 0.18);
+  background: linear-gradient(90deg, rgba(13, 148, 136, 0.06), rgba(251, 113, 133, 0.06));
+  padding: 1rem 0;
+}
+
+.oc-marquee-track {
+  display: flex;
+  gap: 3.5rem;
+  width: max-content;
+  animation: oc-marquee 26s linear infinite;
+  color: #0f766e;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+/* ---------- Keyframes ---------- */
+@keyframes oc-float-slow {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-22px) scale(1.06); }
+}
+
+@keyframes oc-bob {
+  0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.65; }
+  50% { transform: translateX(-50%) translateY(8px); opacity: 1; }
+}
+
+@keyframes oc-pulse-ring {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(94, 234, 212, 0.35); }
+  50% { box-shadow: 0 0 0 10px rgba(94, 234, 212, 0); }
+}
+
+@keyframes oc-modal-in {
+  from { opacity: 0; transform: translateY(28px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes oc-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes oc-count-pop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+
+.oc-count-pop {
+  animation: oc-count-pop 0.5s ease;
+}
+
+/* ---------- Misc ---------- */
+.oc-divider-glow {
+  height: 1px;
+  border: 0;
+  background: linear-gradient(90deg, transparent, rgba(13, 148, 136, 0.45), transparent);
+}
+
+.oc-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  background: rgba(13, 148, 136, 0.1);
+  color: var(--oc-teal-dark);
+  border: 1px solid rgba(13, 148, 136, 0.2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .oc-reveal { opacity: 1; transform: none; transition: none; }
+  .oc-marquee-track { animation: none; }
+  .oc-hero-badge, .oc-scroll-hint, .oc-footer-orb, .oc-modal-orb { animation: none; }
+}

@@ -39,19 +39,23 @@ const LoginSignup = (props) => {
           data.loginSignupModal ? "" : "hidden"
         } fixed z-40 inset-0 my-8 md:my-20 flex items-start justify-center overflow-auto`}
       >
-        <div className="w-11/12 md:w-3/5 lg:w-2/4 relative space-y-4 bg-white p-6 md:px-12 md:py-6">
-          {login ? <Login /> : <Signup />}
-          <div className="flex items-center space-x-2">
-            <span className="border-b border-gray-500 w-full" />
-            <span className="font-medium">or</span>
-            <span className="border-b border-gray-500 w-full" />
-          </div>
-          <div
-            onClick={(e) => changeLoginSignup()}
-            style={{ color: "#0d9488", border: "1px solid #0d9488" }}
-            className="px-4 py-2 font-medium text-center cursor-pointer"
-          >
-            {loginValue}
+        <div className="w-11/12 md:w-3/5 lg:w-2/4 relative space-y-4 oc-modal-card p-6 md:px-12 md:py-6">
+          <span className="oc-modal-orb" style={{ width: 140, height: 140, top: -40, right: -30, background: "#2dd4bf" }} />
+          <span className="oc-modal-orb" style={{ width: 110, height: 110, bottom: -35, left: -25, background: "#fb7185", animationDelay: "1.6s" }} />
+          <div style={{ position: "relative", zIndex: 2 }}>
+            {login ? <Login /> : <Signup />}
+            <div className="flex items-center space-x-2">
+              <span className="border-b border-gray-500 w-full" />
+              <span className="font-medium">or</span>
+              <span className="border-b border-gray-500 w-full" />
+            </div>
+            <div
+              onClick={(e) => changeLoginSignup()}
+              style={{ color: "#0d9488", border: "1px solid #0d9488", borderRadius: 10 }}
+              className="px-4 py-2 font-medium text-center cursor-pointer mt-4 hover:bg-teal-50 transition-colors"
+            >
+              {loginValue}
+            </div>
           </div>
           {/*  Modal Close Button */}
           <div className="absolute top-0 right-0 mx-4">
